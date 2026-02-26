@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="spectral" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a78bfa"/>
+      <stop offset="35%" stop-color="#ee6633"/>
+      <stop offset="65%" stop-color="#f0c040"/>
+      <stop offset="100%" stop-color="#33bbee"/>
+    </linearGradient>
+    <mask id="inner-shape">
+      <rect width="64" height="64" fill="black"/>
+      <rect x="6" y="6" width="52" height="52" rx="12" fill="white"/>
+    </mask>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="#0c0c0f"/>
+  <!-- Inner rounded square with spectral gradient -->
+  <rect x="6" y="6" width="52" height="52" rx="12" fill="url(#spectral)"/>
+  <!-- Cut out center to make it a frame/ring -->
+  <rect x="16" y="16" width="32" height="32" rx="7" fill="#0c0c0f"/>
+</svg>

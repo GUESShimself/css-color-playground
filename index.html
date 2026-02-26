@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CSS Color Playground — Level 4 & 5</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/styles/main.css" />
+  <link rel="icon" type="image/png" href="/favicon.svg" />
+</head>
+<body>
+  <div class="app-layout">
+  <aside class="sidebar">
+    <header class="site-header">
+      <div class="header-inner">
+        <h1 class="site-title">CSS Color <span class="title-accent">Playground</span></h1>
+        <p class="site-subtitle">An interactive exploration of CSS Color Module Level 4 &amp; 5</p>
+      </div>
+      <nav class="section-nav" aria-label="Playground sections">
+        <ul>
+          <li><a href="#color-mix" class="nav-link active" data-section="color-mix">color-mix()</a></li>
+          <li><a href="#relative-colors" class="nav-link" data-section="relative-colors">Relative Colors</a></li>
+          <li><a href="#color-spaces" class="nav-link" data-section="color-spaces">Color Spaces</a></li>
+          <li><a href="#light-dark" class="nav-link" data-section="light-dark">light-dark()</a></li>
+        </ul>
+      </nav>
+    </header>
+    <footer class="site-footer">
+      <p>Built as an exploration of <a href="https://drafts.csswg.org/css-color-5/" target="_blank" rel="noopener">CSS Color Module Level 5</a> &amp; <a href="https://drafts.csswg.org/css-color-4/" target="_blank" rel="noopener">Level 4</a></p>
+    </footer>
+  </aside>
+
+  <main>
+    <!-- ============================================ -->
+    <!-- SECTION 1: color-mix()                       -->
+    <!-- ============================================ -->
+    <section id="color-mix" class="playground-section">
+      <div class="section-intro">
+        <h2>color-mix() <a href="https://drafts.csswg.org/css-color-5/#color-mix" target="_blank" rel="noopener" class="spec-link">Read the spec (L5)</a></h2>
+        <p class="section-description">Blend two colors in any color space at any ratio. The mixing color space dramatically affects the result — the same percentages produce different colors in sRGB vs. oklch vs. lab.</p>
+      </div>
+
+      <div class="playground-panel" id="color-mix-panel">
+        <div class="controls-row">
+          <div class="control-group">
+            <label for="mix-color-1">Color 1</label>
+            <div class="color-input-wrapper">
+              <input type="color" id="mix-color-1" value="#6633ee" />
+              <input type="text" id="mix-color-1-text" class="color-text-input" value="#6633ee" aria-label="Color 1 hex value" />
+            </div>
+          </div>
+
+          <div class="control-group range-group">
+            <label for="mix-ratio">Ratio</label>
+            <input type="range" id="mix-ratio" min="0" max="100" value="50" />
+            <output id="mix-ratio-output" for="mix-ratio">50%</output>
+          </div>
+
+          <div class="control-group">
+            <label for="mix-color-2">Color 2</label>
+            <div class="color-input-wrapper">
+              <input type="color" id="mix-color-2" value="#ee6633" />
+              <input type="text" id="mix-color-2-text" class="color-text-input" value="#ee6633" aria-label="Color 2 hex value" />
+            </div>
+          </div>
+        </div>
+
+        <div class="control-group space-selector" role="group" aria-label="Color Space">
+          <span class="control-label">Color Space</span>
+          <div class="space-chips" id="mix-space-chips">
+            <button class="chip" data-space="srgb">sRGB</button>
+            <button class="chip active" data-space="oklch">oklch</button>
+            <button class="chip" data-space="oklab">oklab</button>
+            <button class="chip" data-space="lch">lch</button>
+            <button class="chip" data-space="lab">lab</button>
+            <button class="chip" data-space="hsl">hsl</button>
+            <button class="chip" data-space="hwb">hwb</button>
+          </div>
+        </div>
+
+        <!-- Result display -->
+        <div class="mix-result-area">
+          <div class="mix-gradient-bar" id="mix-gradient-bar"></div>
+          <div class="mix-swatches">
+            <div class="swatch swatch-start" id="mix-swatch-start"></div>
+            <div class="swatch swatch-result" id="mix-swatch-result">
+              <span class="swatch-label" id="mix-result-label"></span>
+            </div>
+            <div class="swatch swatch-end" id="mix-swatch-end"></div>
+          </div>
+        </div>
+
+        <!-- Compare across spaces -->
+        <div class="compare-toggle-row">
+          <button class="toggle-btn" id="mix-compare-toggle">Compare across all spaces</button>
+        </div>
+        <div class="compare-grid hidden" id="mix-compare-grid"></div>
+
+        <!-- Generated CSS -->
+        <div class="code-output">
+          <pre><code id="mix-css-output"></code></pre>
+          <button class="copy-btn" data-target="mix-css-output" aria-label="Copy CSS">Copy</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- SECTION 2: Relative Colors                   -->
+    <!-- ============================================ -->
+    <section id="relative-colors" class="playground-section">
+      <div class="section-intro">
+        <h2>Relative Colors <a href="https://drafts.csswg.org/css-color-5/#relative-colors" target="_blank" rel="noopener" class="spec-link">Read the spec (L5)</a></h2>
+        <p class="section-description">Decompose a color into its channels, then manipulate them with <code>calc()</code>. Pick a base color, choose a color function, and adjust individual channels to see palettes emerge in real time.</p>
+      </div>
+
+      <div class="playground-panel" id="relative-colors-panel">
+        <div class="controls-row">
+          <div class="control-group">
+            <label for="rcs-base-color">Origin Color</label>
+            <div class="color-input-wrapper">
+              <input type="color" id="rcs-base-color" value="#2563eb" />
+              <input type="text" id="rcs-base-color-text" class="color-text-input" value="#2563eb" aria-label="Origin color hex value" />
+            </div>
+          </div>
+
+          <div class="control-group space-selector" role="group" aria-label="Color Function">
+            <span class="control-label">Color Function</span>
+            <div class="space-chips" id="rcs-space-chips">
+              <button class="chip active" data-space="oklch">oklch</button>
+              <button class="chip" data-space="oklab">oklab</button>
+              <button class="chip" data-space="lch">lch</button>
+              <button class="chip" data-space="hsl">hsl</button>
+              <button class="chip" data-space="rgb">rgb</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Channel sliders (dynamically generated based on color function) -->
+        <div class="channel-controls" id="rcs-channel-controls"></div>
+        <button class="toggle-btn" id="rcs-reset-btn">Reset offsets</button>
+
+        <!-- Palette output -->
+        <div class="color-ramp color-ramp--lg" id="rcs-palette"></div>
+
+        <!-- Generated CSS -->
+        <div class="code-output">
+          <pre><code id="rcs-css-output"></code></pre>
+          <button class="copy-btn" data-target="rcs-css-output" aria-label="Copy CSS">Copy</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- SECTION 3: Color Spaces                      -->
+    <!-- ============================================ -->
+    <section id="color-spaces" class="playground-section">
+      <div class="section-intro">
+        <h2>Color Spaces <a href="https://drafts.csswg.org/css-color-4/#the-color-property" target="_blank" rel="noopener" class="spec-link">Read the spec (L4)</a></h2>
+        <p class="section-description">Not all color spaces are created equal. See how perceptual uniformity — or lack thereof — affects lightness ramps, gradients, and palette generation. This is the "why" behind oklch and oklab.</p>
+      </div>
+
+      <div class="playground-panel" id="color-spaces-panel">
+        <div class="controls-row">
+          <div class="control-group">
+            <label for="cs-base-color">Base Color</label>
+            <div class="color-input-wrapper">
+              <input type="color" id="cs-base-color" value="#e63946" />
+              <input type="text" id="cs-base-color-text" class="color-text-input" value="#e63946" aria-label="Base color hex value" />
+            </div>
+          </div>
+          <div class="control-group">
+            <label for="cs-steps">Steps</label>
+            <input type="range" id="cs-steps" min="5" max="15" value="9" />
+            <output id="cs-steps-output" for="cs-steps">9</output>
+          </div>
+        </div>
+
+        <!-- Lightness ramps comparison -->
+        <div class="cs-comparison" id="cs-comparison"></div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- SECTION 4: light-dark()                      -->
+    <!-- ============================================ -->
+    <section id="light-dark" class="playground-section">
+      <div class="section-intro">
+        <h2>light-dark() <a href="https://drafts.csswg.org/css-color-5/#light-dark" target="_blank" rel="noopener" class="spec-link">Read the spec (L5)</a></h2>
+        <p class="section-description">A function that resolves to one of two colors based on the used <code>color-scheme</code>. Define both variants in one declaration — no media queries needed.</p>
+      </div>
+
+      <div class="playground-panel" id="light-dark-panel">
+        <p class="controls-hint">Choose the text color for each scheme — light mode typically uses a dark color, and dark mode a light one.</p>
+        <div class="controls-row">
+          <div class="control-group">
+            <label for="ld-light-color">Light Value</label>
+            <div class="color-input-wrapper">
+              <input type="color" id="ld-light-color" value="#1a1a2e" />
+              <input type="text" id="ld-light-color-text" class="color-text-input" value="#1a1a2e" aria-label="Light value hex" />
+            </div>
+          </div>
+          <div class="control-group">
+            <label for="ld-dark-color">Dark Value</label>
+            <div class="color-input-wrapper">
+              <input type="color" id="ld-dark-color" value="#eaeaea" />
+              <input type="text" id="ld-dark-color-text" class="color-text-input" value="#eaeaea" aria-label="Dark value hex" />
+            </div>
+          </div>
+          <div class="control-group" role="group" aria-label="Color scheme">
+            <span class="control-label">Scheme</span>
+            <div class="scheme-toggle" id="ld-scheme-toggle">
+              <button class="chip active" data-scheme="light">Light</button>
+              <button class="chip" data-scheme="dark">Dark</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="ld-preview" id="ld-preview">
+          <div class="ld-preview-card">
+            <h3>Preview Card</h3>
+            <p>This card uses <code>light-dark()</code> for its text color, adapting automatically to the active color scheme.</p>
+          </div>
+        </div>
+
+        <div class="code-output">
+          <pre><code id="ld-css-output"></code></pre>
+          <button class="copy-btn" data-target="ld-css-output" aria-label="Copy CSS">Copy</button>
+        </div>
+      </div>
+    </section>
+  </main>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
