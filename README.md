@@ -1,6 +1,14 @@
 # CSS Color Playground
 
-An interactive playground for exploring CSS Color Module Level 4 & 5 features. Built with vanilla JS and CSS — no frameworks, no polyfills — so every color you see is resolved natively by your browser.
+An interactive exploration of modern CSS Color Level 4 & 5 features.
+
+This playground lets you experiment with:
+- `color-mix()`
+- Relative color syntax (`oklch(from …)`)
+- Perceptual color spaces (OKLCH / OKLAB)
+- Light-dark system-aware theming
+
+Built to better understand how modern CSS handles color — and how that impacts design systems.
 
 ## Sections
 
