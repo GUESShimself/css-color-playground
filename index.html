@@ -24,6 +24,7 @@
           <li><a href="#relative-colors" class="nav-link" data-section="relative-colors">Relative Colors</a></li>
           <li><a href="#color-spaces" class="nav-link" data-section="color-spaces">Color Spaces</a></li>
           <li><a href="#light-dark" class="nav-link" data-section="light-dark">light-dark()</a></li>
+          <li><a href="#contrast-color" class="nav-link" data-section="contrast-color">contrast-color()</a></li>
         </ul>
       </nav>
     </header>
@@ -228,6 +229,85 @@
           <pre><code id="ld-css-output"></code></pre>
           <button class="copy-btn" data-target="ld-css-output" aria-label="Copy CSS">Copy</button>
         </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- SECTION 5: contrast-color()                  -->
+    <!-- ============================================ -->
+    <section id="contrast-color" class="playground-section">
+      <div class="section-intro">
+        <h2>contrast-color() <a href="https://drafts.csswg.org/css-color-5/#contrast-color" target="_blank" rel="noopener" class="spec-link">Read the spec (L5)</a></h2>
+        <p class="section-description">Automatically picks the highest-contrast text color — <code>white</code> or <code>black</code> — against any background. Uses WCAG 2.0 relative luminance. No math required in your CSS.</p>
+      </div>
+
+      <div class="playground-panel" id="contrast-color-panel">
+
+        <div class="cc-callout cc-callout--warning" id="cc-support-warning" hidden>
+          <strong>Not supported in this browser.</strong> contrast-color() requires Chrome 147+, Safari 26+, or Firefox 146+. The preview uses a JavaScript implementation of the same WCAG 2.0 algorithm so you can still explore the concept.
+        </div>
+
+        <div class="controls-row">
+          <div class="control-group">
+            <label for="cc-bg-color">Background Color</label>
+            <div class="color-input-wrapper">
+              <input type="color" id="cc-bg-color" value="#6633ee" />
+              <input type="text" id="cc-bg-color-text" class="color-text-input" value="#6633ee" aria-label="Background color hex value" />
+            </div>
+          </div>
+        </div>
+
+        <div class="cc-result-area" id="cc-result-area">
+          <div class="cc-bg-swatch" id="cc-bg-swatch">
+            <span class="cc-result-text" id="cc-result-text">Sample Text</span>
+            <span class="cc-result-badge" id="cc-result-badge"></span>
+          </div>
+          <div class="cc-callout cc-callout--info" id="cc-midtone-warning" hidden>
+            <strong>Mid-tone edge case:</strong> Neither <code>white</code> nor <code>black</code> achieves WCAG AAA (7:1) contrast against this color. contrast-color() returns the better option and will still pass AA (4.5:1), but enhanced accessibility requires a less mid-tone background.
+          </div>
+        </div>
+
+        <div class="cc-ratios" id="cc-ratios">
+          <div class="cc-ratio-row">
+            <span class="cc-ratio-label">vs. white</span>
+            <span class="cc-ratio-value" id="cc-ratio-white">—</span>
+            <span class="cc-ratio-bar-track"><span class="cc-ratio-bar" id="cc-ratio-bar-white"></span></span>
+          </div>
+          <div class="cc-ratio-row">
+            <span class="cc-ratio-label">vs. black</span>
+            <span class="cc-ratio-value" id="cc-ratio-black">—</span>
+            <span class="cc-ratio-bar-track"><span class="cc-ratio-bar" id="cc-ratio-bar-black"></span></span>
+          </div>
+          <p class="cc-ratio-note">WCAG AA requires 4.5:1 for normal text</p>
+        </div>
+
+        <div class="cc-tinting">
+          <div class="control-group">
+            <span class="controls-label">Brand color recovery</span>
+            <p class="controls-hint">Pure black or white text on a saturated background loses brand identity. Blending a small amount of the background color back in recovers the hue while maintaining readability.</p>
+          </div>
+          <div class="control-group range-group">
+            <label for="cc-tint-amount">Tint amount</label>
+            <input type="range" id="cc-tint-amount" min="0" max="40" value="20" step="1" />
+            <output id="cc-tint-output" for="cc-tint-amount">20%</output>
+          </div>
+          <div class="cc-tint-compare" id="cc-tint-compare">
+            <div class="cc-tint-swatch" id="cc-tint-swatch-pure">
+              <span class="cc-tint-label">Pure</span>
+              <span class="cc-tint-sample" id="cc-tint-sample-pure">Sample Text</span>
+            </div>
+            <div class="cc-tint-swatch" id="cc-tint-swatch-tinted">
+              <span class="cc-tint-label">Tinted</span>
+              <span class="cc-tint-sample" id="cc-tint-sample-tinted">Sample Text</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="code-output">
+          <pre><code id="cc-css-output"></code></pre>
+          <button class="copy-btn" data-target="cc-css-output" aria-label="Copy CSS">Copy</button>
+        </div>
+
       </div>
     </section>
   </main>

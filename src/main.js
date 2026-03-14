@@ -6,6 +6,7 @@ import { initColorMix } from './modules/colorMix.js';
 import { initRelativeColors } from './modules/relativeColors.js';
 import { initColorSpaces } from './modules/colorSpaces.js';
 import { initLightDark } from './modules/lightDark.js';
+import { initContrastColor } from './modules/contrastColor.js';
 
 // Init all playgrounds
 document.addEventListener('DOMContentLoaded', () => {
@@ -13,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initRelativeColors();
   initColorSpaces();
   initLightDark();
+  initContrastColor();
   setupCopyButtons();
   initNav();
 });

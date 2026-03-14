@@ -7,6 +7,7 @@ This playground lets you experiment with:
 - Relative color syntax (`oklch(from …)`)
 - Perceptual color spaces (OKLCH / OKLAB)
 - Light-dark system-aware theming
+- `contrast-color()` — automatic WCAG-compliant text contrast
 
 Built to better understand how modern CSS handles color — and how that impacts design systems.
 
@@ -16,6 +17,7 @@ Built to better understand how modern CSS handles color — and how that impacts
 - **Relative Colors** — Decompose a color into its channels, manipulate them with `calc()`, and generate full palettes
 - **Color Spaces** — Compare lightness ramps across oklch, lch, hsl, and color-mix to see perceptual uniformity in action
 - **light-dark()** — Preview the native CSS function that resolves to one of two colors based on `color-scheme`
+- **contrast-color()** — Automatically pick `white` or `black` for maximum text contrast; visualize WCAG ratios and recover brand color with `color-mix()` tinting
 
 ## Getting started
 
@@ -39,9 +41,11 @@ The output is a static site in `dist/` — deploy it anywhere.
 
 Requires a browser that supports CSS Color Level 4 & 5 features:
 
-- Chrome 119+
-- Safari 16.4+
-- Firefox 128+
+- Chrome 119+ (contrast-color() requires 147+)
+- Safari 16.4+ (contrast-color() requires 26+)
+- Firefox 128+ (contrast-color() requires 146+)
+
+The contrast-color() section falls back to a JavaScript implementation of the same WCAG 2.0 algorithm on older browsers.
 
 ## Project structure
 
@@ -53,6 +57,7 @@ src/
 │   ├── relativeColors.js   Relative color syntax playground
 │   ├── colorSpaces.js      Color space comparison
 │   ├── lightDark.js        light-dark() playground
+│   ├── contrastColor.js    contrast-color() playground
 │   └── utils.js            Shared utilities (resolveColor, color space configs)
 └── styles/
     ├── main.css            Import hub
